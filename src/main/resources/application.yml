@@ -1,0 +1,28 @@
+app:
+  sandbox: false
+  allowedOrigins: "*"
+server:
+  address: 0.0.0.0
+  port: 8081
+spring:
+  application:
+    name: chat-service
+  datasource:
+    url: jdbc:sqlite:/home/databases/sqlite/r-chat.db
+    driver-class-name: org.sqlite.JDBC
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.community.dialect.SQLiteDialect
+    hibernate:
+      ddl-auto: update
+    open-in-view: true
+    show-sql: false
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://31.97.249.200:8761/eureka/
+  instance:
+    prefer-ip-address: true
