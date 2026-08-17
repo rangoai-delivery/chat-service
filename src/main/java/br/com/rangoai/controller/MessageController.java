@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.rangoai.model.Message;
+import br.com.rangoai.model.MessageType;
 import br.com.rangoai.repository.MessageRepository;
 
 @RestController
@@ -29,6 +30,7 @@ public class MessageController {
 	@Autowired
 	private Environment environment;
 
+	@CrossOrigin(origins = "*")
 	@GetMapping("/status")
 	public String status() {
 
@@ -36,7 +38,7 @@ public class MessageController {
 
 	}
 
-	
+	@CrossOrigin(origins = "*")
 	@PostMapping("/save")
 	private void save(@RequestBody String body) {
 
@@ -60,7 +62,7 @@ public class MessageController {
 
 	}
 
-	
+	@CrossOrigin(origins = "*")
 	@GetMapping("/get-messages-by-uuid")
 	private List<Message> getMessagesByCustomerId(@RequestParam String uuid) {
 
@@ -69,5 +71,25 @@ public class MessageController {
 		return messages;
 
 	}
+	
+	/*@CrossOrigin(origins = "*")
+	@GetMapping("/get-messages-by-uuid")
+	private List<Message> getMessagesByCustomerId(@RequestParam String uuid) {
+
+		List<Message> messages = messageRepository.findByUuid(uuid);
+
+		return messages;
+
+	}
+	
+	@CrossOrigin(origins = "*")
+	@GetMapping("/get-messages-by-email")
+	private List<Message> getMessagesByEmail(@RequestParam String email) {
+
+		List<Message> messages = messageRepository.findByUuidContainingAndType(email, MessageType.CUSTOMER);
+
+		return messages;
+
+	}*/
 
 }
